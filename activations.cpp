@@ -1,5 +1,5 @@
 #include "activations.h"
-#include "activation.h"
+#include "src/layer.h"
 
 class Sigmoid: public Activation {
   public:

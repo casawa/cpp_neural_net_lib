@@ -1,10 +1,12 @@
-#ifndef ACTIVATION_H 
-#define ACTIVATION_H 
+#ifndef LAYER_H 
+#define LAYER_H 
 
-class Activation {
+class Layer {
   public:
     virtual void forward() = 0;
     virtual void backward() = 0;
 };
+
+class Activation: public Layer {};
 
 #endif
