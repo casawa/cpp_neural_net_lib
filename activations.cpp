@@ -1,13 +1,13 @@
 #include "activations.h"
 
-/* TODO */
+/* TODO test sigmoid more */
 xt::xarray<double> Sigmoid::forward(xt::xarray<double> input) {
-  return NULL;
+  this->output = 1 / (1 + xt::exp(-1.0 * input));
+  return this->output;;
 }
 
-/* TODO */
 xt::xarray<double> Sigmoid::backward(xt::xarray<double> incoming_grad)  {
-  return NULL;
+  return incoming_grad * this->output * (1 - this->output);
 }
 
 /* TODO test ReLU more */
