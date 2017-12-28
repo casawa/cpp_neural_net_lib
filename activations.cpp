@@ -1,32 +1,23 @@
 #include "activations.h"
-#include "src/layer.h"
 
-class Sigmoid: public Activation {
-  public:
-    void forward();
-    void backward();
-};
-
-class ReLU: public Activation {
-  public:
-    void forward();
-    void backward();
-};
-
-void Sigmoid::forward() {
-
+/* TODO */
+xt::xarray<double> Sigmoid::forward(xt::xarray<double> input) {
+  return NULL;
 }
 
-void Sigmoid::backward() {
-
+/* TODO */
+xt::xarray<double> Sigmoid::backward(xt::xarray<double> incoming_grad)  {
+  return NULL;
 }
 
-void ReLU::forward() {
-
+/* TODO test ReLU more */
+xt::xarray<double> ReLU::forward(xt::xarray<double> input) {
+  this->output = xt::maximum(input, 0);
+  return this->output;
 }
 
-void ReLU::backward() {
-
+xt::xarray<double> ReLU::backward(xt::xarray<double> incoming_grad) {
+  return xt::sign(this->output) * incoming_grad;
 }
 
 
