@@ -1,5 +1,6 @@
 #include "activations.h"
 #include "layers.h"
+#include "optimizers.h"
 #include "xtensor/xarray.hpp"
 #include "xtensor/xio.hpp"
 #include <string>
@@ -29,21 +30,23 @@ bool test_relu() {
 /* TODO: use expected arrays for the results */
 bool test_fc() {
   /* Test FC forwards. */
-  FullyConnected fc(3, 5); 
-  xt::xarray<double> inp {1.0, -2.0, 3.0};
+  SGDOptimizer sgd(0.03);
+  FullyConnected fc(3, 5, &sgd); 
+  
+  xt::xarray<double> inp {{1.0, -2.0, 3.0}};
   xt::xarray<double> fwd_result = fc.forward(inp);
 
   std::cout << "FORWARDS (input, result)" << std::endl;
   std::cout << inp << std::endl;
   std::cout << fwd_result << std::endl;
 
-  /* Test FC backwards. 
-  xt::xarray<double> inc_grad {3.0, 0.5, -2.0, 1.0};
-  xt::xarray<double> bwd_result = relu.backward(inc_grad);
+  /* Test FC backwards. */ 
+  xt::xarray<double> inc_grad {{3.0, 0.5, -2.0, 1.0, 0.0}};
+  xt::xarray<double> bwd_result = fc.backward(inc_grad);
 
   std::cout << "BACKWARDS (inc grad, result)" << std::endl;
   std::cout << inc_grad << std::endl;
-  std::cout << bwd_result << std::endl; */
+  std::cout << bwd_result << std::endl;
 
   return true;
 }

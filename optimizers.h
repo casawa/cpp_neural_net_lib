@@ -2,17 +2,20 @@
 #ifndef OPTIMIZERS_H 
 #define OPTIMIZERS_H 
 
+#include "xtensor/xarray.hpp"
+
 /* Optimization Base Class. */
 class Optimizer {
-  private:
+  protected:
     double learning_rate;
   public:
     Optimizer(double learning_rate);
     virtual void update(xt::xarray<double> &weights, const xt::xarray<double> &grad) = 0;
 };
 
-class SGD: public Optimizer {
+class SGDOptimizer: public Optimizer {
   public:
+    using Optimizer::Optimizer;
     void update(xt::xarray<double> &weights, const xt::xarray<double> &grad);
 };
 

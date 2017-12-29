@@ -3,9 +3,10 @@
 #include "xtensor/xstrided_view.hpp"
 #include "xtensor-blas/xlinalg.hpp"
 
-FullyConnected::FullyConnected(int num_input, int num_output) {
+FullyConnected::FullyConnected(int num_input, int num_output, Optimizer *optimizer) {
   this->weights = xt::random::randn<double>({num_input, num_output});
   this->biases = xt::random::randn<double>({num_output});
+  this->optimizer = optimizer;
 }
 
 xt::xarray<double> FullyConnected::forward(xt::xarray<double> input) {

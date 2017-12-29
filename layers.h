@@ -12,7 +12,7 @@ class FullyConnected: public Layer {
     xt::xarray<double> biases;
     Optimizer *optimizer;
   public:
-    FullyConnected(int num_input, int num_output);
+    FullyConnected(int num_input, int num_output, Optimizer *optimizer);
     xt::xarray<double> forward(xt::xarray<double> input);
     xt::xarray<double> backward(xt::xarray<double> incoming_grad);
 };
