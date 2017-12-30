@@ -1,8 +1,9 @@
-# A Neural Net Library in C++
+# A Simple Neural Net Library in C++
 
 **Current State**: Early Development
 
 ## Dependencies
+- C++ 14
 - xtensor
 - xtensor-blas
 
@@ -18,3 +19,4 @@
 - SGD
 
 ## Losses
+- MSE
