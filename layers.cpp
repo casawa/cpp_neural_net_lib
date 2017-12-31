@@ -14,14 +14,13 @@ xt::xarray<double> FullyConnected::forward(xt::xarray<double> input) {
   return xt::linalg::dot(input, this->weights) + this->biases;
 }
 
-/* TODO */
 xt::xarray<double> FullyConnected::backward(xt::xarray<double> incoming_grad) {
   /* y = xW + b */
   /* dW = x'dy */
   /* dx = dy * W'*/
 
   xt::xarray<double> dW = xt::linalg::dot(xt::transpose(this->input), incoming_grad); 
-  xt::xarray<double> db = incoming_grad; 
+  xt::xarray<double> db = xt::sum(incoming_grad, {0});
 
   this->optimizer->update(this->weights, dW);
   this->optimizer->update(this->biases, db);

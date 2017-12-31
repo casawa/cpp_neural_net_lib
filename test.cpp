@@ -4,9 +4,11 @@
 #include "losses.h"
 #include "optimizers.h"
 #include "xtensor/xarray.hpp"
+#include "xtensor/xrandom.hpp"
 #include "xtensor/xio.hpp"
 #include <string>
 
+/* Reports the results of testing a model on some test input. */
 void graph_test_on_input(Graph &graph, xt::xarray<double> test) {
   std::cout << "Testing On: " << test << std::endl;
   std::cout << "Result: " << graph.run(test) << std::endl;
@@ -14,14 +16,16 @@ void graph_test_on_input(Graph &graph, xt::xarray<double> test) {
 
 bool test_graph_optimization() {
   Graph graph;
-  SGDOptimizer sgd(0.05);
-  graph.add_layer(new FullyConnected(3, 3, &sgd)); 
+  SGDOptimizer sgd_fc1(0.00003), sgd_fc2(0.00003), sgd_fc3(0.00003);
+  graph.add_layer(new FullyConnected(3, 4, &sgd_fc1));
+  graph.add_layer(new FullyConnected(4, 4, &sgd_fc2));
+  graph.add_layer(new FullyConnected(4, 3, &sgd_fc3));
 
   MSELoss mse(3);
-  xt::xarray<double> inp {{1.0, -2.0, 3.0}};
-  xt::xarray<double> target {{2.0, -4.0, 6.0}};
+  xt::xarray<double> inp = xt::random::randn<double>({100, 3});
+  xt::xarray<double> target = 2 * inp;
 
-  graph.optimize(&mse, inp, target, 20);
+  graph.optimize(&mse, inp, target, 400, true);
 
   xt::xarray<double> test1 {{1.0, -2.0, 3.0}};
   graph_test_on_input(graph, test1);

@@ -12,7 +12,7 @@ class Graph {
     void backwards(xt::xarray<double> loss_grad);
   public:
     void add_layer(Layer *layer);
-    void optimize(Loss *loss, xt::xarray<double> input, xt::xarray<double> target, size_t num_iter);
+    void optimize(Loss *loss, xt::xarray<double> input, xt::xarray<double> target, size_t num_iter, bool print_loss=false);
     xt::xarray<double> run(xt::xarray<double> input);
 };
 

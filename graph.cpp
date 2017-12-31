@@ -24,12 +24,14 @@ void Graph::backwards(xt::xarray<double> loss_grad) {
   }
 }
 
-void Graph::optimize(Loss *loss, xt::xarray<double> input, xt::xarray<double> target, size_t num_iter) {
+void Graph::optimize(Loss *loss, xt::xarray<double> input, xt::xarray<double> target, size_t num_iter, bool print_loss) {
 
   for (size_t i = 0; i < num_iter; i++) {
     xt::xarray<double> result = this->run(input);
     xt::xarray<double> loss_amt = loss->forward(result, target);
-    std::cout << "Loss: " << loss_amt << std::endl;
+
+    if (print_loss) std::cout << "Loss: " << loss_amt << std::endl;
+
     xt::xarray<double> loss_grad = loss->backward();
     this->backwards(loss_grad);
   }
