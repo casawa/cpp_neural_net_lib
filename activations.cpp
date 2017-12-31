@@ -1,4 +1,5 @@
 #include "activations.h"
+#include "xtensor/xmath.hpp"
 
 /* TODO test sigmoid more */
 xt::xarray<double> Sigmoid::forward(xt::xarray<double> input) {
@@ -20,6 +21,12 @@ xt::xarray<double> ReLU::backward(xt::xarray<double> incoming_grad) {
   return xt::sign(this->output) * incoming_grad;
 }
 
+/* TODO test Tanh more */
+xt::xarray<double> Tanh::forward(xt::xarray<double> input) {
+  this->output = xt::tanh(input);
+  return this->output;
+}
 
-void sigmoid() {}
-void relu() {}
+xt::xarray<double> Tanh::backward(xt::xarray<double> incoming_grad) {
+  return (1 - xt::pow(this->output, 2)) * incoming_grad;
+}

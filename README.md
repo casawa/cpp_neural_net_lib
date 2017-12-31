@@ -14,6 +14,7 @@
 ## Activations 
 - ReLU 
 - Sigmoid
+- Tanh 
 
 ## Optimizers
 - SGD

@@ -20,7 +20,12 @@ class ReLU: public Activation {
     xt::xarray<double> backward(xt::xarray<double> incoming_grad);
 };
 
-void sigmoid();
-void relu();
+class Tanh: public Activation {
+  private:
+    xt::xarray<double> output;
+  public:
+    xt::xarray<double> forward(xt::xarray<double> input);
+    xt::xarray<double> backward(xt::xarray<double> incoming_grad);
+};
 
 #endif
