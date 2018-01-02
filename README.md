@@ -18,6 +18,8 @@
 
 ## Optimizers
 - SGD
+- Momentum
+- Adam
 
 ## Losses
 - MSE

@@ -10,9 +10,10 @@ class FullyConnected: public Layer {
     xt::xarray<double> input;
     xt::xarray<double> weights;
     xt::xarray<double> biases;
-    Optimizer *optimizer;
+    Optimizer *w_optimizer;
+    Optimizer *b_optimizer;
   public:
-    FullyConnected(int num_input, int num_output, Optimizer *optimizer);
+    FullyConnected(int num_input, int num_output, Optimizer *w_optimizer, Optimizer *b_optimizer);
     xt::xarray<double> forward(xt::xarray<double> input);
     xt::xarray<double> backward(xt::xarray<double> incoming_grad);
 };
